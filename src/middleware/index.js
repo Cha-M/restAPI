@@ -1,4 +1,5 @@
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 const User = require("../user/userModel");
 
 exports.hashPassword = async (req, res, next) => {
@@ -27,5 +28,24 @@ exports.decryptPassword = async (req, res, next) => {
     } catch (error) {
         console.log(error);
         res.status(500).send({ err: error.message })
+    }
+};
+
+exports.checkToken = async (req, res, next) => {
+    try {
+        const token = req.header("Authorization").replace("Bearer ", "");
+        const decodedToken = await jwt.verify(token, process.env.SECRET);
+        req.user = await User.findById(decodedToken._id);
+        if (req.user) {
+            next();
+        } else {
+            throw new Error("No user found");
+        }
+        // console.log(user);
+        // next();
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({err: error.message});
     }
 };

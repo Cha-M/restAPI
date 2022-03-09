@@ -1,5 +1,7 @@
 const Movie = require("./movieModel");
 
+//Submission is CRUD
+
 //Create
 exports.addMovie = async (req, res) => {
     try {
