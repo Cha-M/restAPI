@@ -68,7 +68,7 @@ exports.deleteUser = async (req, res) => {
             console.log(error);
             res.status(500).send({ err: error.message });
     }
-}
+};
     
     
 exports.login = async (req, res) => {
@@ -78,4 +78,4 @@ exports.login = async (req, res) => {
         console.log(error);
         res.status(500).send({ err: error.message });
     }
-}
+};

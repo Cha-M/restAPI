@@ -8,7 +8,7 @@ userRouter.post("/login", decryptPassword, login);
 userRouter.get("/user", checkToken, login);
 userRouter.patch("/user", hashPassword, checkToken, updatePassword);
 //movieRouter.delete("/movie/:filterKey/:filterVal", deleteMovie);
-userRouter.delete("/user/:filterKey/:filterKey", deleteUser);
+userRouter.delete("/user/:filterKey/:filterVal", checkToken, deleteUser);
 userRouter.get("/list", listUsers);
 
 //targeting the endpoint

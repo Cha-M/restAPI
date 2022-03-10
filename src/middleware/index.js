@@ -44,7 +44,12 @@ exports.decryptPassword = async (req, res, next) => {
 exports.checkToken = async (req, res, next) => {
     try {
         const token = req.header("Authorization").replace("Bearer ", "");
+        //this is grabbing the token from the header
+
+        //tokens must be sent on the header of a request
         const decodedToken = await jwt.verify(token, process.env.SECRET);
+
+        //find the user using the token
         req.user = await User.findById(decodedToken._id);
         if (req.user) {
             next();
