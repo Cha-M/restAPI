@@ -39,9 +39,9 @@ exports.updateMovie = async (req, res) => {
 //Delete
 exports.deleteMovie = async (req, res) => {
     try {
-        const deleteMovie = await Movie.deleteOne( {[req.params.deleteKey]: req.body.deleteVal} );
-        if (deleteMovie.modifiedCount > 0) {
-            res.status(200).send({ movie: deleteMovie });
+        const deletedMovie = await Movie.deleteOne( {[req.params.deleteKey]: req.body.deleteVal} );
+        if (deletedMovie.deletedCount > 0) {
+            res.status(200).send({ movie: deletedMovie });
         }
         else {
             throw new Error("Did not delete.");
