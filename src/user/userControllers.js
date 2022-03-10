@@ -57,7 +57,7 @@ exports.deleteUser = async (req, res) => {
         // const token = await jwt.sign({ _id: deletedUser._id }, process.env.SECRET);
         // res.status(200).send({ user: deletedUser.username, token });
 
-        if (deletedUser.deletedCount > 0) {
+        if (deletedUser && deletedUser.deletedCount > 0) {
             res.status(200).send({ msg: "Successfully deleted user." });
         }
         else {
