@@ -29,7 +29,7 @@ exports.decryptPassword = async (req, res, next) => {
     try {
         // const password = req.body.password;
         req.user = await User.findOne({ username: req.body.username });
-        if (await bcrypt.compare(eq.body.password, req.user.password)) {
+        if (await bcrypt.compare(req.body.password, req.user.password)) {
             next();
         }
         else {
@@ -47,7 +47,7 @@ exports.checkToken = async (req, res, next) => {
         //this is grabbing the token from the header
 
         //tokens must be sent on the header of a request
-        const decodedToken = await jwt.verify(token, process.env.SECRET);
+        const decodedToken = await jwt.verify(token, process.env.SECRET);//secret matches when jwt created
 
         //find the user using the token
         req.user = await User.findById(decodedToken._id);
